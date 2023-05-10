@@ -67,11 +67,14 @@ public class FlutterKbzPayPlugin implements MethodCallHandler, FlutterPlugin, Ac
 
     @Override
     public void onAttachedToEngine(FlutterPluginBinding binding) {
+        System.out.print("onAttachedToEngine Function binding!");  
+
         onAttachedToEngine(binding.getApplicationContext(), binding.getBinaryMessenger());
     }
 
 
     private void onAttachedToEngine(Context applicationContext, BinaryMessenger messenger) {
+         System.out.print("onAttachedToEngine Function!");  
         this.context = applicationContext;
         final MethodChannel methodChannel = new MethodChannel(messenger, "flutter_kbz_pay");
         final EventChannel eventchannel = new EventChannel(messenger, "flutter_kbz_pay/pay_status");
