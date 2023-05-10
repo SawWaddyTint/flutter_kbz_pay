@@ -96,6 +96,8 @@ public class FlutterKbzPayPlugin implements MethodCallHandler, FlutterPlugin, Ac
 
     @Override
     public void onMethodCall(MethodCall call, Result result) {
+            System.out.print("OnMethodCall Function!");  
+    
         switch (call.method) {
             case "startPay":
                 createPay(call, result);
@@ -117,6 +119,8 @@ public class FlutterKbzPayPlugin implements MethodCallHandler, FlutterPlugin, Ac
     }
 
     private void createPay(MethodCall call, Result result) {
+             System.out.print("createPay Function!");  
+
         HashMap<String, Object> map = call.arguments();
         try {
             JSONObject params = new JSONObject(map);
@@ -133,10 +137,16 @@ public class FlutterKbzPayPlugin implements MethodCallHandler, FlutterPlugin, Ac
                 buildOrderInfo(prepayId, merch_code, appid, sign_key);
                 KBZPay.startPay(this.activity, mOrderInfo, mSign, signType);
                 result.success("payStatus " + 0);
+                System.out.print("createPay Function IF!");  
+
             } else {
+                System.out.print("createPay Function IF!");  
+
                 result.error("parameter error", "parameter error", null);
             }
         } catch (JSONException e) {
+                System.out.print("createPay Function Else!");  
+
             e.printStackTrace();
             return;
         }

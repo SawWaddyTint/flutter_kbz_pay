@@ -12,6 +12,7 @@ public class CallbackResultActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.print("On Create Function!");  
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         int result = intent.getIntExtra(KBZPay.EXTRA_RESULT, 0);
