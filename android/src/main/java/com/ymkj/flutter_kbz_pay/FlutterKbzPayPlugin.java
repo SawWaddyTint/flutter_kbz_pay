@@ -67,14 +67,14 @@ public class FlutterKbzPayPlugin implements MethodCallHandler, FlutterPlugin, Ac
 
     @Override
     public void onAttachedToEngine(FlutterPluginBinding binding) {
-        System.out.print("onAttachedToEngine Function binding!");  
+            Log.v("onAttachedToEngine binding Function !!!");
 
         onAttachedToEngine(binding.getApplicationContext(), binding.getBinaryMessenger());
     }
 
 
     private void onAttachedToEngine(Context applicationContext, BinaryMessenger messenger) {
-         System.out.print("onAttachedToEngine Function!");  
+        Log.v("onAttachedToEngine Function!");  
         this.context = applicationContext;
         final MethodChannel methodChannel = new MethodChannel(messenger, "flutter_kbz_pay");
         final EventChannel eventchannel = new EventChannel(messenger, "flutter_kbz_pay/pay_status");
@@ -99,7 +99,7 @@ public class FlutterKbzPayPlugin implements MethodCallHandler, FlutterPlugin, Ac
 
     @Override
     public void onMethodCall(MethodCall call, Result result) {
-            System.out.print("OnMethodCall Function!");  
+            Log.v("onMethodCall Function !!!");
     
         switch (call.method) {
             case "startPay":
@@ -122,8 +122,7 @@ public class FlutterKbzPayPlugin implements MethodCallHandler, FlutterPlugin, Ac
     }
 
     private void createPay(MethodCall call, Result result) {
-             System.out.print("createPay Function!");  
-
+            Log.v("createPay Function !!!");
         HashMap<String, Object> map = call.arguments();
         try {
             JSONObject params = new JSONObject(map);
@@ -137,7 +136,9 @@ public class FlutterKbzPayPlugin implements MethodCallHandler, FlutterPlugin, Ac
                 merch_code = params.getString("merch_code");
                 appid = params.getString("appid");
                 sign_key = params.getString("sign_key");
+                 Log.v("getString finished");
                 buildOrderInfo(prepayId, merch_code, appid, sign_key);
+                 Log.v("buildOrderInfo  and before kbz startPay");
                 KBZPay.startPay(this.activity, mOrderInfo, mSign, signType);
                 result.success("payStatus " + 0);
                 System.out.print("createPay Function IF!");  
